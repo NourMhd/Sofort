@@ -9,7 +9,7 @@ class ApiInfo{
   static Future<ModelCompanyInfo?> getOneCompany({
     required String companyNumber,
   }) async {
-    var url =Uri.https('api.sofort-handelsregister.com:3002', '/api/companies/fullDetails/T2214V_HRB2344', {'q': '{http}'});
+    var url =Uri.https('api.sofort-handelsregister.com:3002', '/api/companies/fullDetails/$companyNumber', {'q': '{http}'});
       var response = await http.get(url,headers: {
         "content-type": "application/json",
         "accept": "application/json",

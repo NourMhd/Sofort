@@ -3,12 +3,10 @@ import 'package:sofort/colors/const.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:sofort/modeles_api/model_api_info/model_info.dart';
 
-
-
 class CompanyInfo extends StatefulWidget {
-   ModelCompanyInfo company;
+  ModelCompanyInfo company;
 
-    CompanyInfo({Key? key,required this.company}) : super(key: key);
+  CompanyInfo({Key? key, required this.company}) : super(key: key);
 
   @override
   State<CompanyInfo> createState() => _CompanyInfoState();
@@ -17,31 +15,41 @@ class CompanyInfo extends StatefulWidget {
 class _CompanyInfoState extends State<CompanyInfo> {
   bool value = false;
   bool value1 = false;
+  String company_name = "";
+  String? status;
+  String? registeredAddress;
+  String? registerType;
+  String? registerNumber;
+   String? capital;
   @override
   void initState() {
-    print("hani wslet");
-    print(widget.company.company!.companyName);
+    company_name = widget.company.company!.companyName!;
+    status = widget.company.company!.status!;
+    registeredAddress = widget.company.company!.registeredAddress!;
+    registerType = widget.company.company!.registerType!;
+    registerNumber = widget.company.company!.registerNumber!;
+     capital = widget.company.company!.capital!;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final company =widget.company;
-    var companyName =company.company!.companyName;
+    final company = widget.company;
+    
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(
           children: [
             Row(
-              children: const [
+              children: [
                 Padding(
                   padding: EdgeInsets.only(
                     top: 100,
                     left: 11,
                   ),
                   child: Text(
-                    "test",
+                    company_name,
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 25,
@@ -58,17 +66,17 @@ class _CompanyInfoState extends State<CompanyInfo> {
                     left: 11,
                   ),
                   child: RichText(
-                    text: const TextSpan(
+                    text: TextSpan(
                       children: [
                         TextSpan(
-                          text: "Status: ",
+                          text: "Status:",
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 17,
                           ),
                         ),
                         TextSpan(
-                          text: " infoStatus",
+                          text: status,
                           style: TextStyle(color: Colors.black),
                         ),
                       ],
@@ -110,13 +118,13 @@ class _CompanyInfoState extends State<CompanyInfo> {
                           Row(
                             children: [
                               RichText(
-                                text: const TextSpan(
+                                text: TextSpan(
                                   children: [
-                                    WidgetSpan(
+                                    const WidgetSpan(
                                       child: Icon(Icons.location_on,
                                           size: 17.0, color: redicon),
                                     ),
-                                    TextSpan(
+                                    const TextSpan(
                                       text: "Adressen: ",
                                       style: TextStyle(
                                         color: Colors.blueGrey,
@@ -124,8 +132,8 @@ class _CompanyInfoState extends State<CompanyInfo> {
                                       ),
                                     ),
                                     TextSpan(
-                                      text: " infoAddress",
-                                      style: TextStyle(color: Colors.blueGrey),
+                                      text: registeredAddress,
+                                      style: const TextStyle(color: Colors.blueGrey),
                                     ),
                                   ],
                                 ),
@@ -139,26 +147,27 @@ class _CompanyInfoState extends State<CompanyInfo> {
                             children: [
                               Expanded(
                                 child: RichText(
-                                  text: const TextSpan(
+                                  text: TextSpan(
                                     children: [
-                                      WidgetSpan(
+                                      const WidgetSpan(
                                         child: Icon(
                                           Icons.check_box,
                                           color: redicon,
                                           size: 17.0,
                                         ),
                                       ),
-                                      TextSpan(
+                                      const TextSpan(
                                         text: "HR-Nummer: ",
                                         style: TextStyle(
                                           color: Colors.blueGrey,
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
-                                      TextSpan(
-                                        text: " infoHR-Nummer",
-                                        style:
-                                            TextStyle(color: Colors.blueGrey),
+                                      
+                                       TextSpan(
+                                      text:  registerNumber,
+                                      style:
+                                       const TextStyle(color: Colors.blueGrey),
                                       ),
                                     ],
                                   ),
@@ -207,16 +216,16 @@ class _CompanyInfoState extends State<CompanyInfo> {
                             children: [
                               Expanded(
                                 child: RichText(
-                                  text: const TextSpan(
+                                  text:  TextSpan(
                                     children: [
-                                      WidgetSpan(
+                                      const WidgetSpan(
                                         child: Icon(
                                           Icons.euro,
                                           color: redicon,
                                           size: 17.0,
                                         ),
                                       ),
-                                      TextSpan(
+                                    const   TextSpan(
                                         text: "Kapital: ",
                                         style: TextStyle(
                                           color: Colors.blueGrey,
@@ -224,9 +233,9 @@ class _CompanyInfoState extends State<CompanyInfo> {
                                         ),
                                       ),
                                       TextSpan(
-                                        text: " infokapital",
+                                        text: capital,
                                         style:
-                                            TextStyle(color: Colors.blueGrey),
+                                            const TextStyle(color: Colors.blueGrey),
                                       ),
                                     ],
                                   ),
@@ -258,7 +267,7 @@ class _CompanyInfoState extends State<CompanyInfo> {
                                         ),
                                       ),
                                       TextSpan(
-                                        text: " infoWebsite",
+                                        text: " keine Daten verfügbar",
                                         style:
                                             TextStyle(color: Colors.blueGrey),
                                       ),
@@ -292,7 +301,7 @@ class _CompanyInfoState extends State<CompanyInfo> {
                                         ),
                                       ),
                                       TextSpan(
-                                        text: " infoTelefon",
+                                        text: " keine Daten verfügbar",
                                         style:
                                             TextStyle(color: Colors.blueGrey),
                                       ),
@@ -326,7 +335,7 @@ class _CompanyInfoState extends State<CompanyInfo> {
                                         ),
                                       ),
                                       TextSpan(
-                                        text: " infoEmail",
+                                        text: " keine Daten verfügbar",
                                         style:
                                             TextStyle(color: Colors.blueGrey),
                                       ),
@@ -349,9 +358,9 @@ class _CompanyInfoState extends State<CompanyInfo> {
                               const Text(
                                 'INSOLVENZCHECK',
                                 style: TextStyle(
-                                          color: Colors.blueGrey,
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                                  color: Colors.blueGrey,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                               const SizedBox(width: 10),
                               Checkbox(
@@ -374,9 +383,9 @@ class _CompanyInfoState extends State<CompanyInfo> {
                               const Text(
                                 'BILANZCHECK',
                                 style: TextStyle(
-                                          color: Colors.blueGrey,
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                                  color: Colors.blueGrey,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                               const SizedBox(width: 35),
                               Checkbox(
@@ -392,7 +401,6 @@ class _CompanyInfoState extends State<CompanyInfo> {
                           ElevatedButton.icon(
                             icon: const Icon(
                               Icons.check,
-                              
                               size: 17.0,
                             ),
                             label: const Text(
@@ -438,12 +446,12 @@ class _CompanyInfoState extends State<CompanyInfo> {
                 child: Column(
                   children: [
                     Container(
-                      height: 80,
+                      height:90,
                       color: Colors.blue[50],
                       child: ListTile(
                         title: Text(
-                          ' SIE SUCHEN DEN HANDELSREGISTERAUSZUG ODER DEN JAHRESABSCHLUSS DES UNTERNEHMEN' +
-                              "",
+                          ' SIE SUCHEN DEN HANDELSREGISTERAUSZUG ODER DEN JAHRESABSCHLUSS DES UNTERNEHMEN' +' '+
+                              company_name,
                           textAlign: TextAlign.center,
                           style: TextStyle(color: Colors.blue.withOpacity(0.6)),
                         ),
@@ -455,102 +463,144 @@ class _CompanyInfoState extends State<CompanyInfo> {
                         children: [
                           Row(
                             children: [
-                              const Icon(Icons.description, color: redicon,size: 17.0,),
+                              const Icon(
+                                Icons.description,
+                                color: redicon,
+                                size: 17.0,
+                              ),
                               TextButton(
                                   child: const Text(
-                                    'Document1',
-                                    style: TextStyle(
-                                        color: Colors.blue, fontSize: 11),
+                                    'Aktueller Abdruck',
+                                     style: TextStyle(
+                                          color: Colors.blueGrey,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                   ),
                                   onPressed: () {}),
                             ],
                           ),
                           Row(
                             children: [
-                              const Icon(Icons.description, color: redicon,size: 17.0,),
+                              const Icon(
+                                Icons.description,
+                                color: redicon,
+                                size: 17.0,
+                              ),
                               TextButton(
                                   child: const Text(
-                                    'Document2',
-                                    style: TextStyle(
-                                        color: Colors.blue, fontSize: 11),
+                                    'Chronologischer Abdruck',
+                                     style: TextStyle(
+                                          color: Colors.blueGrey,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                   ),
                                   onPressed: () {}),
                             ],
                           ),
-                          
                           Row(
                             children: [
-                              const Icon(Icons.description, color: redicon,size: 17.0,),
+                              const Icon(
+                                Icons.description,
+                                color: redicon,
+                                size: 17.0,
+                              ),
                               TextButton(
                                   child: const Text(
-                                    'Document2',
+                                    'Historischer Handelsregisterauszug',
                                     style: TextStyle(
-                                        color: Colors.blue, fontSize: 11),
+                                          color: Colors.blueGrey,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                   ),
                                   onPressed: () {}),
                             ],
-                          )
-                          ,
+                          ),
                           Row(
                             children: [
-                              const Icon(Icons.description, color: redicon,size: 17.0,),
+                              const Icon(
+                                Icons.description,
+                                color: redicon,
+                                size: 17.0,
+                              ),
                               TextButton(
                                   child: const Text(
-                                    'Document2',
-                                    style: TextStyle(
-                                        color: Colors.blue, fontSize: 11),
+                                    'Strukturierter Registerinhalt',
+                                     style: TextStyle(
+                                          color: Colors.blueGrey,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                   ),
                                   onPressed: () {}),
                             ],
-                          )
-                          ,
+                          ),
                           Row(
                             children: [
-                              const Icon(Icons.description, color: redicon,size: 17.0,),
+                              const Icon(
+                                Icons.description,
+                                color: redicon,
+                                size: 17.0,
+                              ),
                               TextButton(
                                   child: const Text(
-                                    'Document2',
-                                    style: TextStyle(
-                                        color: Colors.blue, fontSize: 11),
+                                    'Liste der Gesellschafter',
+                                     style: TextStyle(
+                                          color: Colors.blueGrey,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                   ),
                                   onPressed: () {}),
                             ],
-                          )
-                          ,
+                          ),
                           Row(
                             children: [
-                              const Icon(Icons.description, color: redicon,size: 17.0,),
+                              const Icon(
+                                Icons.description,
+                                color: redicon,
+                                size: 17.0,
+                              ),
                               TextButton(
                                   child: const Text(
-                                    'Document2',
-                                    style: TextStyle(
-                                        color: Colors.blue, fontSize: 11),
+                                    'Gesellschaftsvertrag',
+                                     style: TextStyle(
+                                          color: Colors.blueGrey,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                   ),
                                   onPressed: () {}),
                             ],
-                          )
-                          ,
+                          ),
                           Row(
                             children: [
-                              const Icon(Icons.description, color: redicon,size: 17.0,),
+                              const Icon(
+                                Icons.description,
+                                color: redicon,
+                                size: 17.0,
+                              ),
                               TextButton(
                                   child: const Text(
-                                    'Document2',
-                                    style: TextStyle(
-                                        color: Colors.blue, fontSize: 11),
+                                    'Anmeldungen / Protokolle',
+                                     style: TextStyle(
+                                          color: Colors.blueGrey,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                   ),
                                   onPressed: () {}),
                             ],
-                          )
-                          ,
+                          ),
                           Row(
                             children: [
-                              const Icon(Icons.description, color: redicon,size: 17.0,),
+                              const Icon(
+                                Icons.description,
+                                color: redicon,
+                                size: 17.0,
+                              ),
                               TextButton(
                                   child: const Text(
-                                    'Document2',
-                                    style: TextStyle(
-                                        color: Colors.blue, fontSize: 11),
+                                    'Bilanz / Jahresabschluss',
+                                     style: TextStyle(
+                                          color: Colors.blueGrey,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                   ),
                                   onPressed: () {}),
                             ],
@@ -612,7 +662,7 @@ class _CompanyInfoState extends State<CompanyInfo> {
                       color: Colors.blue[50],
                       child: ListTile(
                         title: Text(
-                          ' HANDELSREGISTERAUSZUG' + "",
+                          ' HANDELSREGISTERAUSZUG'  +' '+ company_name,
                           textAlign: TextAlign.center,
                           style: TextStyle(color: Colors.blue.withOpacity(0.6)),
                         ),
@@ -654,8 +704,8 @@ class _CompanyInfoState extends State<CompanyInfo> {
                       color: Colors.blue[50],
                       child: ListTile(
                         title: Text(
-                          ' HIER DIE NEUSTEN HANDELSREGISTER-BEKANNTMACHUNGEN ZUM UNTERNEHMEN ' +
-                              "",
+                          ' HIER DIE NEUSTEN HANDELSREGISTER-BEKANNTMACHUNGEN ZUM UNTERNEHMEN '  +' '+
+                              company_name,
                           textAlign: TextAlign.center,
                           style: TextStyle(color: Colors.blue.withOpacity(0.6)),
                         ),
@@ -737,7 +787,7 @@ class _CompanyInfoState extends State<CompanyInfo> {
                       color: Colors.blue[50],
                       child: ListTile(
                         title: Text(
-                          ' BEWERTUNGEN FÜR:' + "",
+                          ' BEWERTUNGEN FÜR'  +' '+ company_name,
                           textAlign: TextAlign.center,
                           style: TextStyle(color: Colors.blue.withOpacity(0.6)),
                         ),

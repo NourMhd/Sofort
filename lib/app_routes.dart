@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:sofort/modeles_api/model_api_info/model_info.dart';
 import 'package:sofort/ui/home_page.dart';
@@ -5,6 +7,7 @@ import 'package:sofort/ui/menu/creation_account.dart';
 import 'package:sofort/ui/menu/login.dart';
 import 'package:sofort/ui/menu/my_profile.dart';
 import 'package:sofort/ui/mylist/company_info.dart';
+import 'package:sofort/ui/mylist/myListWidgets/documents.dart';
 import 'package:sofort/ui/mylist/myList_Page.dart';
 import 'package:sofort/ui/search/search_page.dart';
 
@@ -33,6 +36,9 @@ Route<dynamic> controller(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => const CreationAccount());
       case companyInfo:
      return MaterialPageRoute(builder: (context) =>   CompanyInfo(company:arguments as ModelCompanyInfo ));
+     case documents:
+      return MaterialPageRoute(builder: (context) => const Documents());
+     
      
 
 
