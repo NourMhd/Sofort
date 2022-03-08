@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sofort/app_routes.dart';
 import 'package:sofort/colors/const.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:sofort/modeles_api/model_api_info/model_info.dart';
@@ -20,7 +21,7 @@ class _CompanyInfoState extends State<CompanyInfo> {
   String? registeredAddress;
   String? registerType;
   String? registerNumber;
-   String? capital;
+  String? capital;
   @override
   void initState() {
     company_name = widget.company.company!.companyName!;
@@ -28,14 +29,14 @@ class _CompanyInfoState extends State<CompanyInfo> {
     registeredAddress = widget.company.company!.registeredAddress!;
     registerType = widget.company.company!.registerType!;
     registerNumber = widget.company.company!.registerNumber!;
-     capital = widget.company.company!.capital!;
+    capital = widget.company.company!.capital!;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     final company = widget.company;
-    
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -133,7 +134,8 @@ class _CompanyInfoState extends State<CompanyInfo> {
                                     ),
                                     TextSpan(
                                       text: registeredAddress,
-                                      style: const TextStyle(color: Colors.blueGrey),
+                                      style: const TextStyle(
+                                          color: Colors.blueGrey),
                                     ),
                                   ],
                                 ),
@@ -163,11 +165,10 @@ class _CompanyInfoState extends State<CompanyInfo> {
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
-                                      
-                                       TextSpan(
-                                      text:  registerNumber,
-                                      style:
-                                       const TextStyle(color: Colors.blueGrey),
+                                      TextSpan(
+                                        text: registerNumber,
+                                        style: const TextStyle(
+                                            color: Colors.blueGrey),
                                       ),
                                     ],
                                   ),
@@ -216,7 +217,7 @@ class _CompanyInfoState extends State<CompanyInfo> {
                             children: [
                               Expanded(
                                 child: RichText(
-                                  text:  TextSpan(
+                                  text: TextSpan(
                                     children: [
                                       const WidgetSpan(
                                         child: Icon(
@@ -225,7 +226,7 @@ class _CompanyInfoState extends State<CompanyInfo> {
                                           size: 17.0,
                                         ),
                                       ),
-                                    const   TextSpan(
+                                      const TextSpan(
                                         text: "Kapital: ",
                                         style: TextStyle(
                                           color: Colors.blueGrey,
@@ -234,8 +235,8 @@ class _CompanyInfoState extends State<CompanyInfo> {
                                       ),
                                       TextSpan(
                                         text: capital,
-                                        style:
-                                            const TextStyle(color: Colors.blueGrey),
+                                        style: const TextStyle(
+                                            color: Colors.blueGrey),
                                       ),
                                     ],
                                   ),
@@ -446,11 +447,12 @@ class _CompanyInfoState extends State<CompanyInfo> {
                 child: Column(
                   children: [
                     Container(
-                      height:90,
+                      height: 90,
                       color: Colors.blue[50],
                       child: ListTile(
                         title: Text(
-                          ' SIE SUCHEN DEN HANDELSREGISTERAUSZUG ODER DEN JAHRESABSCHLUSS DES UNTERNEHMEN' +' '+
+                          ' SIE SUCHEN DEN HANDELSREGISTERAUSZUG ODER DEN JAHRESABSCHLUSS DES UNTERNEHMEN' +
+                              ' ' +
                               company_name,
                           textAlign: TextAlign.center,
                           style: TextStyle(color: Colors.blue.withOpacity(0.6)),
@@ -471,12 +473,13 @@ class _CompanyInfoState extends State<CompanyInfo> {
                               TextButton(
                                   child: const Text(
                                     'Aktueller Abdruck',
-                                     style: TextStyle(
-                                          color: Colors.blueGrey,
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                                    style: TextStyle(
+                                      color: Colors.blueGrey,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
-                                  onPressed: () {}),
+                                  onPressed: () =>
+                                Navigator.pushNamed(context, documentsview)),
                             ],
                           ),
                           Row(
@@ -489,12 +492,13 @@ class _CompanyInfoState extends State<CompanyInfo> {
                               TextButton(
                                   child: const Text(
                                     'Chronologischer Abdruck',
-                                     style: TextStyle(
-                                          color: Colors.blueGrey,
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                                    style: TextStyle(
+                                      color: Colors.blueGrey,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
-                                  onPressed: () {}),
+                                  onPressed: () =>
+                                Navigator.pushNamed(context, documentsview)),
                             ],
                           ),
                           Row(
@@ -508,11 +512,12 @@ class _CompanyInfoState extends State<CompanyInfo> {
                                   child: const Text(
                                     'Historischer Handelsregisterauszug',
                                     style: TextStyle(
-                                          color: Colors.blueGrey,
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                                      color: Colors.blueGrey,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
-                                  onPressed: () {}),
+                                  onPressed: () =>
+                                Navigator.pushNamed(context, documentsview)),
                             ],
                           ),
                           Row(
@@ -525,12 +530,13 @@ class _CompanyInfoState extends State<CompanyInfo> {
                               TextButton(
                                   child: const Text(
                                     'Strukturierter Registerinhalt',
-                                     style: TextStyle(
-                                          color: Colors.blueGrey,
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                                    style: TextStyle(
+                                      color: Colors.blueGrey,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
-                                  onPressed: () {}),
+                                  onPressed: () =>
+                                Navigator.pushNamed(context, documentsview)),
                             ],
                           ),
                           Row(
@@ -543,12 +549,13 @@ class _CompanyInfoState extends State<CompanyInfo> {
                               TextButton(
                                   child: const Text(
                                     'Liste der Gesellschafter',
-                                     style: TextStyle(
-                                          color: Colors.blueGrey,
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                                    style: TextStyle(
+                                      color: Colors.blueGrey,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
-                                  onPressed: () {}),
+                                  onPressed: () =>
+                                Navigator.pushNamed(context, documentsview)),
                             ],
                           ),
                           Row(
@@ -561,12 +568,13 @@ class _CompanyInfoState extends State<CompanyInfo> {
                               TextButton(
                                   child: const Text(
                                     'Gesellschaftsvertrag',
-                                     style: TextStyle(
-                                          color: Colors.blueGrey,
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                                    style: TextStyle(
+                                      color: Colors.blueGrey,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
-                                  onPressed: () {}),
+                                  onPressed: () =>
+                                Navigator.pushNamed(context, documentsview)),
                             ],
                           ),
                           Row(
@@ -579,12 +587,13 @@ class _CompanyInfoState extends State<CompanyInfo> {
                               TextButton(
                                   child: const Text(
                                     'Anmeldungen / Protokolle',
-                                     style: TextStyle(
-                                          color: Colors.blueGrey,
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                                    style: TextStyle(
+                                      color: Colors.blueGrey,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
-                                  onPressed: () {}),
+                                  onPressed: ()=>
+                                Navigator.pushNamed(context, documentsview)),
                             ],
                           ),
                           Row(
@@ -597,12 +606,13 @@ class _CompanyInfoState extends State<CompanyInfo> {
                               TextButton(
                                   child: const Text(
                                     'Bilanz / Jahresabschluss',
-                                     style: TextStyle(
-                                          color: Colors.blueGrey,
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                                    style: TextStyle(
+                                      color: Colors.blueGrey,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
-                                  onPressed: () {}),
+                                  onPressed: ()=>
+                                Navigator.pushNamed(context, documentsview)),
                             ],
                           ),
                           const Text(
@@ -636,7 +646,8 @@ class _CompanyInfoState extends State<CompanyInfo> {
                               ),
                             ),
                             // Within the `FirstRoute` widget
-                            onPressed: () {},
+                            onPressed: () =>
+                                Navigator.pushNamed(context, documentsview),
                           ),
                         ],
                       ),
@@ -662,7 +673,7 @@ class _CompanyInfoState extends State<CompanyInfo> {
                       color: Colors.blue[50],
                       child: ListTile(
                         title: Text(
-                          ' HANDELSREGISTERAUSZUG'  +' '+ company_name,
+                          ' HANDELSREGISTERAUSZUG' + ' ' + company_name,
                           textAlign: TextAlign.center,
                           style: TextStyle(color: Colors.blue.withOpacity(0.6)),
                         ),
@@ -704,7 +715,8 @@ class _CompanyInfoState extends State<CompanyInfo> {
                       color: Colors.blue[50],
                       child: ListTile(
                         title: Text(
-                          ' HIER DIE NEUSTEN HANDELSREGISTER-BEKANNTMACHUNGEN ZUM UNTERNEHMEN '  +' '+
+                          ' HIER DIE NEUSTEN HANDELSREGISTER-BEKANNTMACHUNGEN ZUM UNTERNEHMEN ' +
+                              ' ' +
                               company_name,
                           textAlign: TextAlign.center,
                           style: TextStyle(color: Colors.blue.withOpacity(0.6)),
@@ -787,7 +799,7 @@ class _CompanyInfoState extends State<CompanyInfo> {
                       color: Colors.blue[50],
                       child: ListTile(
                         title: Text(
-                          ' BEWERTUNGEN FÜR'  +' '+ company_name,
+                          ' BEWERTUNGEN FÜR' + ' ' + company_name,
                           textAlign: TextAlign.center,
                           style: TextStyle(color: Colors.blue.withOpacity(0.6)),
                         ),

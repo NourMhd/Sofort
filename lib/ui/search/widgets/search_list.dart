@@ -39,7 +39,7 @@ class ListCard extends StatelessWidget {
         onTap: onTap,
         isThreeLine: true,
       ),
-    );;
+    );
   }
 }
 

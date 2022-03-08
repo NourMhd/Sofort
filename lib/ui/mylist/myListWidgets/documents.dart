@@ -1,38 +1,90 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:sofort/colors/const.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:sofort/modeles_api/model_api_info/model_info.dart';
-class Documents extends StatefulWidget {
-  ModelCompanyInfo company;
-   Documents({Key? key, required this.company}) : super(key: key);
+
+class DocumentsView extends StatefulWidget {
+  //ModelCompanyInfo company;
+  const DocumentsView({Key? key}) : super(key: key);
 
   @override
-  State<Documents> createState() => _DocumentsState();
+  State<DocumentsView> createState() => _DocumentsViewState();
 }
 
-class _DocumentsState extends State<Documents> {
-  String? documents;
-  @override
-  void initState() {
-   // documents = widget.company.company!.documents!;
-    
-  }
+class _DocumentsViewState extends State<DocumentsView> {
+  // Documents? documents;
+
+  //@override
+  //void initState() {
+  //documents = widget.company.company!.documents!;
+
+  //super.initState();
+
+  //}
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-        leading: const Icon(Icons.article,color:Colors.black,),
-
-        title:  Text("dfs"),
-        subtitle: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children:  [
-            
-          ],
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.only(
+          top: 50,
+          left: 5,
+          right: 5,
         ),
-        
-        isThreeLine: true,
-      );
+        child: Card(
+          shadowColor: Colors.blue,
+          clipBehavior: Clip.antiAlias,
+          child: Column(
+            children: [
+              Container(
+                height: 50,
+                color: Colors.blue[50],
+                child: ListTile(
+                  title: Text(
+                    ' docum',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.blue.withOpacity(0.6)),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: Row(
+                  children: [
+                    Column(
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.only(left: 0.0),
+                          child: Text(
+                            "name of doc " + "(type of doc )",
+                            style: TextStyle(
+                              color: Colors.blueGrey,
+                              fontSize: 15,
+                            ),
+                          ),
+                        ),
+                        Card(
+                            child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 5.0),
+                          child: Row(children: const [
+                            Text(
+                              "xddfg",
+                              textAlign: TextAlign.start,
+                            ),
+                            SizedBox(
+                              width: 20.0,
+                            ),
+                            Text("xdfg")
+                          ]),
+                        ))
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          elevation: 10,
+        ),
+      ),
+    );
   }
 }
