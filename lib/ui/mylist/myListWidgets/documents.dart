@@ -10,6 +10,7 @@ class DocumentsView extends StatefulWidget {
 }
 
 class _DocumentsViewState extends State<DocumentsView> {
+  bool value = false;
   // Documents? documents;
 
   //@override
@@ -23,11 +24,13 @@ class _DocumentsViewState extends State<DocumentsView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
+        body: SingleChildScrollView(
+      child: Padding(
         padding: const EdgeInsets.only(
-          top: 50,
+          top: 40,
           left: 5,
           right: 5,
+          bottom: 20,
         ),
         child: Card(
           shadowColor: Colors.blue,
@@ -39,52 +42,81 @@ class _DocumentsViewState extends State<DocumentsView> {
                 color: Colors.blue[50],
                 child: ListTile(
                   title: Text(
-                    ' docum',
+                    ' UNSER DOKUMENTENSERVICE+" "',
                     textAlign: TextAlign.center,
                     style: TextStyle(color: Colors.blue.withOpacity(0.6)),
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 8.0),
-                child: Row(
-                  children: [
-                    Column(
+              ListView.builder(
+                  physics: const PageScrollPhysics(),
+                  scrollDirection: Axis.vertical,
+                  itemCount: 7,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        const Padding(
-                          padding: EdgeInsets.only(left: 0.0),
-                          child: Text(
-                            "name of doc " + "(type of doc )",
-                            style: TextStyle(
-                              color: Colors.blueGrey,
-                              fontSize: 15,
+                        Row(
+                          children: const [
+                            Padding(
+                              padding: EdgeInsets.only(
+                                left: 5,
+                              ),
+                              child: Text(
+                                "Name of doc " + "(type of doc )",
+                                style: TextStyle(
+                                  color: Colors.blueGrey,
+                                  fontSize: 15,
+                                ),
+                              ),
                             ),
-                          ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 5,
                         ),
                         Card(
+                            color: Color.fromARGB(255, 231, 231, 231),
                             child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 5.0),
-                          child: Row(children: const [
-                            Text(
-                              "xddfg",
-                              textAlign: TextAlign.start,
-                            ),
-                            SizedBox(
-                              width: 20.0,
-                            ),
-                            Text("xdfg")
-                          ]),
-                        ))
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 4.0, horizontal: 3),
+                              child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Expanded(
+                                        child: Text(
+                                      "Name of doc",
+                                    )),
+                                    Text(
+                                      "Price €",
+                                    ),
+                                    Checkbox(
+                                      checkColor: Colors.white,
+                                      activeColor:
+                                          Color.fromARGB(255, 189, 1, 1),
+                                      value: value,
+                                      onChanged: (value) {
+                                        setState(() {
+                                          this.value = value!;
+                                        });
+                                      },
+                                    ),
+                                  ]),
+                            )),
+                        const SizedBox(
+                          height: 25,
+                        ),
                       ],
-                    ),
-                  ],
-                ),
-              ),
+                    );
+                  }),
+                  
             ],
           ),
           elevation: 10,
         ),
       ),
-    );
+    ));
   }
 }

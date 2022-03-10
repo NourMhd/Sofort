@@ -22,6 +22,7 @@ class Company {
   String? companyName;
   String? registerNumber;
   String? status;
+  String? registerar;
   String? objective;
   String? registerType;
   String? registeredAddress;
@@ -35,6 +36,7 @@ class Company {
       this.companyName,
       this.registerNumber,
       this.status,
+      this.registerar,
       this.objective,
       this.registerType,
       this.registeredAddress,
@@ -48,6 +50,7 @@ class Company {
     companyName = json['company_name'];
     registerNumber = json['register_number'];
     status = json['status'];
+    registerar = json['registerar'];
     objective = json['objective'];
     registerType = json['register_type'];
     registeredAddress = json['registered_address'];
@@ -75,6 +78,7 @@ class Company {
     data['company_name'] = this.companyName;
     data['register_number'] = this.registerNumber;
     data['status'] = this.status;
+    data['registerar'] = this.registerar;
     data['objective'] = this.objective;
     data['register_type'] = this.registerType;
     data['registered_address'] = this.registeredAddress;
@@ -96,13 +100,15 @@ class Notices {
   String? id;
   String? noticeText;
   String? publicationDate;
+ String?  noticeType;
 
-  Notices({this.id, this.noticeText, this.publicationDate});
+  Notices({this.id, this.noticeText, this.publicationDate,this.noticeType});
 
   Notices.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     noticeText = json['notice_text'];
     publicationDate = json['publication_date'];
+    noticeType = json['notice_type'];
   }
 
   Map<String, dynamic> toJson() {
@@ -110,6 +116,7 @@ class Notices {
     data['id'] = this.id;
     data['notice_text'] = this.noticeText;
     data['publication_date'] = this.publicationDate;
+    data['notice_type'] = this.noticeType;
     return data;
   }
 }
