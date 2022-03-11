@@ -13,6 +13,7 @@ class ApiService {
   
     var url = Uri.https('api.sofort-handelsregister.com:3002', '/api/companies',
         {'q': '{http}'});
+        
 
     // Await the http get response, then decode the json-formatted response.
     var response = await http.post(

@@ -3,12 +3,13 @@ import 'package:sofort/accordion.dart';
 import 'package:sofort/app_routes.dart';
 import 'package:sofort/colors/const.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:sofort/core/arguments.dart';
 import 'package:sofort/modeles_api/model_api_info/model_info.dart';
 
 class CompanyInfo extends StatefulWidget {
-  ModelCompanyInfo company;
+  CompanyInfoParams params;
 
-  CompanyInfo({Key? key, required this.company}) : super(key: key);
+  CompanyInfo({Key? key, required this.params}) : super(key: key);
 
   @override
   State<CompanyInfo> createState() => _CompanyInfoState();
@@ -19,6 +20,7 @@ class _CompanyInfoState extends State<CompanyInfo> {
 
   bool value1 = false;
   String company_name = "";
+  String? webSite  ;
   String? status;
   String? registerar;
   String? registeredAddress;
@@ -29,22 +31,23 @@ class _CompanyInfoState extends State<CompanyInfo> {
 
   @override
   void initState() {
-    company_name = widget.company.company!.companyName!;
-    status = widget.company.company!.status!;
-    registerar = widget.company.company!.registerar!;
-    registeredAddress = widget.company.company!.registeredAddress!;
-    registerType = widget.company.company!.registerType!;
-    registerNumber = widget.company.company!.registerNumber!;
-    capital = widget.company.company!.capital!;
-    notices = widget.company.company!.notices!;
+    company_name = widget.params.modelCampanyInfo.company!.companyName!;
+    status = widget.params.modelCampanyInfo.company!.status!;
+    registerar = widget.params.modelCampanyInfo.company!.registerar!;
+    registeredAddress = widget.params.modelCampanyInfo.company!.registeredAddress!;
+    registerType = widget.params.modelCampanyInfo.company!.registerType!;
+    registerNumber = widget.params.modelCampanyInfo.company!.registerNumber!;
+    capital =widget.params.modelCampanyInfo.company!.capital!;
+    notices = widget.params.modelCampanyInfo.company!.notices!;
+    webSite =widget.params.modelcompany.website!;
+    
 
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final company = widget.company;
-    
+    final company = widget.params.modelCampanyInfo;
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -126,33 +129,31 @@ class _CompanyInfoState extends State<CompanyInfo> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Column(
-                        children: [
-                          Row(
+                        children: [Row(crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              RichText(
-                                text: TextSpan(
-                                  children: [
-                                    const WidgetSpan(
-                                      child: Icon(Icons.location_on,
+                         
+                            
+                                   const  Icon(Icons.location_on,
                                           size: 17.0, color: redicon),
-                                    ),
-                                    const TextSpan(
-                                      text: "Adressen: ",
+                                    
+                                    const  Text(
+                                       "Adressen: ",
+                                        
                                       style: TextStyle(
+                                        
                                         color: Colors.blueGrey,
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
-                                    TextSpan(
-                                      text: registeredAddress,
-                                      style: const TextStyle(
-                                          color: Colors.blueGrey),
+                                    Expanded(
+                                      child: Text(
+                                        registeredAddress!,
+                                        style: const TextStyle(
+                                            color: Colors.blueGrey),
+                                      ),
                                     ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
+                            ]),
+                           
                           const SizedBox(
                             height: 20,
                           ),
@@ -263,7 +264,7 @@ class _CompanyInfoState extends State<CompanyInfo> {
                             children: [
                               Expanded(
                                 child: RichText(
-                                  text: const TextSpan(
+                                  text:  TextSpan(
                                     children: [
                                       WidgetSpan(
                                         child: Icon(
@@ -280,9 +281,10 @@ class _CompanyInfoState extends State<CompanyInfo> {
                                         ),
                                       ),
                                       TextSpan(
-                                        text: " keine Daten verfügbar",
-                                        style:
-                                            TextStyle(color: Colors.blueGrey),
+                                        text: webSite,
+                                        style: TextStyle(
+                                            color:
+                                                Color.fromARGB(255, 155, 0, 0)),
                                       ),
                                     ],
                                   ),
@@ -314,9 +316,10 @@ class _CompanyInfoState extends State<CompanyInfo> {
                                         ),
                                       ),
                                       TextSpan(
-                                        text: " keine Daten verfügbar",
-                                        style:
-                                            TextStyle(color: Colors.blueGrey),
+                                        text: "keine Daten verfügbar",
+                                        style: TextStyle(
+                                            color:
+                                                Color.fromARGB(255, 155, 0, 0)),
                                       ),
                                     ],
                                   ),
@@ -348,9 +351,10 @@ class _CompanyInfoState extends State<CompanyInfo> {
                                         ),
                                       ),
                                       TextSpan(
-                                        text: " keine Daten verfügbar",
-                                        style:
-                                            TextStyle(color: Colors.blueGrey),
+                                        text: "keine Daten verfügbar",
+                                        style: TextStyle(
+                                            color:
+                                                Color.fromARGB(255, 155, 0, 0)),
                                       ),
                                     ],
                                   ),
@@ -459,7 +463,7 @@ class _CompanyInfoState extends State<CompanyInfo> {
                 child: Column(
                   children: [
                     Container(
-                      height: 90,
+                      height: 150,
                       color: Colors.blue[50],
                       child: ListTile(
                         title: Text(
@@ -685,7 +689,7 @@ class _CompanyInfoState extends State<CompanyInfo> {
                       color: Colors.blue[50],
                       child: ListTile(
                         title: Text(
-                          ' HANDELSREGISTERAUSZUG '  + company_name,
+                          ' HANDELSREGISTERAUSZUG ' + company_name,
                           textAlign: TextAlign.center,
                           style: TextStyle(color: Colors.blue.withOpacity(0.6)),
                         ),
@@ -694,31 +698,157 @@ class _CompanyInfoState extends State<CompanyInfo> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
-                        children:  [
+                        children: [
                           Expanded(
-                              child: Text(
-                            'Die Firma ' +
-                                company_name  +
-                                '  im Handelsregister beim Amtsgericht ' +
-                                registerar! +
-                                ' unter der Handelsregister-Nummer ' +
-                                registerNumber! +
-                                ' geführt.\n\n\nDas Unternehmen, welches Sie suchen, kann über die Firmenadresse: ' +
-                                registeredAddress! +
-                                ' schriftlich kontaktiert werden.\n\n\nAktuell gibt es ' +
-                                (notices!.length).toString() +
-                                ' Registerbekanntmachungen zu ' +
-                                company_name +
-                                ' Die letzte Änderung ist vom ' +
-                                notices![(notices!.length) - 1]
-                                            .publicationDate! +'.\n\n\n' +
-                                'Alle Dokumente des Unternehmen '+company_name+' '+'('+registerNumber!+')'+' wie, Aktueller oder Chronologischer Handelsregisterauszug, Bilanzen, Jahresabschluss oder andere Unterlagen werden direkt aus dem Jeweiligen amtlichen Handelsregister ermittelt. Sie erhalten den Handelsregisterzug und alle weiteren Dokumente zum sofort Download per E-Mail.',
-                            textAlign: TextAlign.start,
-                            style: TextStyle(
-                              color: Colors.blueGrey,
-                              fontSize: 15,
+                            child: RichText(
+                              text: TextSpan(
+                                children: [
+                                  const TextSpan(
+                                    text: "Die Firma ",
+                                    style: TextStyle(
+                                      color: Colors.blueGrey,
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text: company_name,
+                                    style: const TextStyle(
+                                      color: Colors.blueGrey,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const TextSpan(
+                                    text:
+                                        ' im Handelsregister beim Amtsgericht ',
+                                    style: TextStyle(
+                                      color: Colors.blueGrey,
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text: registerar!,
+                                    style: const TextStyle(
+                                      color: Colors.blueGrey,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const TextSpan(
+                                    text:
+                                        ' unter der Handelsregister-Nummer ',
+                                    style: TextStyle(
+                                      color: Colors.blueGrey,
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text: registerNumber! ,
+                                    style: const TextStyle(
+                                      color: Colors.blueGrey,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const TextSpan(
+                                    text:
+                                        ' geführt.\n\n\nDas Unternehmen, welches Sie suchen, kann über die Firmenadresse: ',
+                                    style: TextStyle(
+                                      color: Colors.blueGrey,
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text: registeredAddress!  ,
+                                    style: const TextStyle(
+                                      color: Colors.blueGrey,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                   const TextSpan(
+                                    text:
+                                        ' schriftlich kontaktiert werden.\n\n\nAktuell gibt es ',
+                                    style: TextStyle(
+                                      color: Colors.blueGrey,
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text: (notices!.length).toString()  ,
+                                    style: const TextStyle(
+                                      color: Colors.blueGrey,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const TextSpan(
+                                    text:
+                                        ' Registerbekanntmachungen zu ',
+                                    style: TextStyle(
+                                      color: Colors.blueGrey,
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text: company_name   ,
+                                    style: const TextStyle(
+                                      color: Colors.blueGrey,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const TextSpan(
+                                    text:
+                                        ' Die letzte Änderung ist vom ',
+                                    style: TextStyle(
+                                      color: Colors.blueGrey,
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text: notices![(notices!.length) - 1]
+                                            .publicationDate!   ,
+                                    style: const TextStyle(
+                                      color: Colors.blueGrey,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                   const TextSpan(
+                                    text:
+                                        '\n\n\nAlle Dokumente des Unternehmen ',
+                                    style: TextStyle(
+                                      color: Colors.blueGrey,
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text: company_name  ,
+                                    style: const TextStyle(
+                                      color: Colors.blueGrey,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const TextSpan(
+                                    text:
+                                        ' (',
+                                    style: TextStyle(
+                                      color: Colors.blueGrey,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text: registerNumber!  ,
+                                    style: const TextStyle(
+                                      color: Colors.blueGrey,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const TextSpan(
+                                    text:
+                                        ') ',
+                                    style: TextStyle(
+                                      color: Colors.blueGrey,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const TextSpan(
+                                    text:
+                                        'wie, Aktueller oder Chronologischer Handelsregisterauszug, Bilanzen, Jahresabschluss oder andere Unterlagen werden direkt aus dem Jeweiligen amtlichen Handelsregister ermittelt. Sie erhalten den Handelsregisterzug und alle weiteren Dokumente zum sofort Download per E-Mail. ',
+                                    style: TextStyle(
+                                      color: Colors.blueGrey,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                          )),
+                          ),
                         ],
                       ),
                     ),
@@ -739,7 +869,7 @@ class _CompanyInfoState extends State<CompanyInfo> {
                 child: Column(
                   children: [
                     Container(
-                      height: 80,
+                      height: 150,
                       color: Colors.blue[50],
                       child: ListTile(
                         title: Text(

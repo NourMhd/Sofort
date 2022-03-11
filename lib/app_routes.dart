@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sofort/core/arguments.dart';
 import 'package:sofort/modeles_api/model_api_info/model_info.dart';
 import 'package:sofort/ui/home_page.dart';
 import 'package:sofort/ui/menu/creation_account.dart';
@@ -37,7 +38,7 @@ Route<dynamic> controller(RouteSettings settings) {
     case companyInfo:
       return MaterialPageRoute(
           builder: (context) =>
-              CompanyInfo(company: arguments as ModelCompanyInfo));
+              CompanyInfo(params: arguments as CompanyInfoParams));
     case documentsview:
       return MaterialPageRoute(builder: (context) =>const   DocumentsView());
 

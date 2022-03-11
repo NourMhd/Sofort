@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:sofort/core/arguments.dart';
+import 'package:sofort/modeles_api/model_api_contact/api_contact.dart';
+import 'package:sofort/modeles_api/model_api_contact/model_contact.dart';
 import 'package:sofort/modeles_api/model_api_info/api_info.dart';
 import 'package:sofort/modeles_api/model_api_info/model_info.dart';
 
@@ -19,6 +22,7 @@ class Searchwidget extends StatefulWidget {
 
 class _SearchwidgetState extends State<Searchwidget> {
   ListCompanies list = ListCompanies(companies: []);
+  
   TextEditingController controller = TextEditingController();
 
   @override
@@ -187,11 +191,17 @@ class _SearchwidgetState extends State<Searchwidget> {
                       company_name: list.companies![index].companyName!,
                       onTap: (){
                     
-                        getOneCompany(list.companies![index].companyNumber!).then((value){
-                          Navigator.pushNamed(context,companyInfo,arguments: value);
-                        });
+                       getOneCompany(list.companies![index].companyNumber!).then((value){
+                         
+                          getcontact(list.companies![index].companyNumber!).then((v){
+                          final arguments =CompanyInfoParams(modelCampanyInfo: value,modelcompany: v);
+                           Navigator.pushNamed(context,companyInfo,arguments: arguments);
+                          
 
-                      },
+                      });
+                          
+                        }
+                       ,);}
                     ),
                   );
                 },
@@ -213,6 +223,13 @@ class _SearchwidgetState extends State<Searchwidget> {
    return (ss!);
       
   }
+  Future<Modelcompany> getcontact(String company_number) async {
+   var ss = await ApiContact.getcontact(companyNumber: company_number);
+  
+   return (ss!);
+      
+  }
+  
 
   bool isEmpty(ListCompanies listCompanies) {
     if (listCompanies.companies!.isNotEmpty) {
