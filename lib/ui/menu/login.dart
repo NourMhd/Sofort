@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sofort/app_routes.dart';
 
+import '../../colors/const.dart';
+
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
 
@@ -173,6 +175,39 @@ class _LoginState extends State<Login> {
               )),
         ],
       ),),
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.deepOrange,
+        selectedItemColor: backgroundcolor,
+        unselectedItemColor: Colors.white,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'Suchen',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.file_copy),
+            label: 'Jetzt Loslegen',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.menu),
+            label: 'Speisekarte',
+          ),
+        ],
+        
+        onTap: (index){
+  switch(index){
+      case 0:
+        Navigator.pushNamed(context,searchpage);
+        break;
+      case 1:
+        Navigator.pushNamed(context, myListPage);
+        break;
+      case 2:
+        Navigator.pushNamed(context, menuPage );  
+        
+    }
+ },
+      ),
     );
   }
 }

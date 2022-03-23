@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:sofort/ui/home_page.dart';
 
 import 'package:sofort/app_routes.dart' as route;
@@ -25,6 +26,9 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+  DeviceOrientation.portraitUp,
+]);
     return  const MaterialApp(
       
         home: HomePage(),

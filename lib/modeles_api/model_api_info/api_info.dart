@@ -23,6 +23,9 @@ class ApiInfo{
         
         return ModelCompanyInfo.fromJson(json
             .decode(response.body));
+      }else if(response.statusCode == 422){
+        return ModelCompanyInfo(bilans:null,dK: null);
+        
       } else {
         // If that call was not successful, throw an error.
         throw Exception('Request failed with status: ${response.statusCode}.');

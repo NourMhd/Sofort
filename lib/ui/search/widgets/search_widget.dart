@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sofort/colors/const.dart';
 import 'package:sofort/core/arguments.dart';
 import 'package:sofort/modeles_api/model_api_contact/api_contact.dart';
 import 'package:sofort/modeles_api/model_api_contact/model_contact.dart';
@@ -14,15 +15,15 @@ import '../../../app_routes.dart';
 class Searchwidget extends StatefulWidget {
   const Searchwidget({Key? key}) : super(key: key);
 
-
   @override
   State<Searchwidget> createState() => _SearchwidgetState();
 }
 
-
 class _SearchwidgetState extends State<Searchwidget> {
+  Future<ListCompanies>? listCompanies;
+  bool? loading=false;
   ListCompanies list = ListCompanies(companies: []);
-  
+
   TextEditingController controller = TextEditingController();
 
   @override
@@ -36,7 +37,10 @@ class _SearchwidgetState extends State<Searchwidget> {
         ),
         body: SingleChildScrollView(
           child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
-            TextField(controller: controller,
+            TextField(
+              
+              autofocus : true,
+              controller: controller,
               style: const TextStyle(fontSize: 15, color: Colors.deepOrange),
               decoration: InputDecoration(
                 hintText: "Unternehmen suchen...",
@@ -146,34 +150,39 @@ class _SearchwidgetState extends State<Searchwidget> {
             Padding(
               padding: const EdgeInsets.all(3.0),
               child: ElevatedButton(
-                style: ButtonStyle(
-                  foregroundColor:
-                      MaterialStateProperty.all<Color>(Colors.white70),
-                  backgroundColor:
-                      MaterialStateProperty.all<Color>(Colors.deepOrange),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10.0),
-                      ),
-                      side: BorderSide(color: Colors.deepOrange),
-                    ),
-                  ),
+                style: ElevatedButton.styleFrom(
+                  shadowColor:Colors.black,
+                  elevation:15,
+                  
+  
+      primary: blue,
+       onPrimary: Color.fromARGB(255, 255, 255, 255) ,
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10)))
+                
                 ),
                 child: const Text(
                   'Suchen',
                   style: TextStyle(
+                    color: Color.fromARGB(255, 255, 255, 255),
                     fontSize: 10,
                   ),
                 ),
                 onPressed: () {
+
+                  
+                  loading=true;
                   postlist().then((resultat) {
                     setState(() => list = resultat);
                   });
                   print(list.companies![0].companyName);
+                  
                 },
               ),
-            ),
+            ),FutureBuilder<ListCompanies>(
+        future: listCompanies,
+        builder: (context, snapshot){
+          if(loading=true){
+            return
             SizedBox(
               width: mediaQuery.size.width,
               child: ListView.builder(
@@ -183,61 +192,61 @@ class _SearchwidgetState extends State<Searchwidget> {
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
                   return Container(
-                    color: Colors.deepOrange,
                     child: ListCard(
-                      register_number: list.companies![index].registerNumber!,
-                      company_number: list.companies![index].companyNumber!,
-                      status: list.companies![index].status!,
-                      company_name: list.companies![index].companyName!,
-                      onTap: (){
-                    
-                       getOneCompany(list.companies![index].companyNumber!).then((value){
-                         
-                          getcontact(list.companies![index].companyNumber!).then((v){
-                          final arguments =CompanyInfoParams(modelCampanyInfo: value,modelcompany: v);
-                           Navigator.pushNamed(context,companyInfo,arguments: arguments);
+                        register_number: list.companies![index].registerNumber!,
+                        company_number: list.companies![index].companyNumber!,
+                        status: list.companies![index].status!,
+                        company_name: list.companies![index].companyName!,
+                        onTap: () {
                           
-
-                      });
+                          getOneCompany(list.companies![index].companyNumber!)
+                              .then(
+                            (value) {
+                              getcontact(list.companies![index].companyNumber!)
+                                  .then((v) {
+                                final arguments = CompanyInfoParams(
+                                    modelCampanyInfo: value, modelcompany: v);
+                                Navigator.pushNamed(context, companyInfo,
+                                    arguments: arguments);
+                              });
+                            },
+                          );
                           
-                        }
-                       ,);}
-                    ),
+                        }),
                   );
-                },
-              ),
-            ),
-          ]),
+                }));}
+              
+            
+            else{
+            return Center(child:CircularProgressIndicator());
+          }
+        })]),
         ));
   }
-  
 
   Future<ListCompanies> postlist() async {
     list = (await ApiService.postCompanies(company_name: controller.text))!;
-    
+
     return list;
   }
+
   Future<ModelCompanyInfo> getOneCompany(String company_number) async {
-   var ss = await ApiInfo.getOneCompany(companyNumber: company_number);
-  
-   return (ss!);
-      
+    var ss = await ApiInfo.getOneCompany(companyNumber: company_number);
+
+    return (ss!);
   }
+
   Future<Modelcompany> getcontact(String company_number) async {
-   var ss = await ApiContact.getcontact(companyNumber: company_number);
-  
-   return (ss!);
-      
+    var ss = await ApiContact.getcontact(companyNumber: company_number);
+
+    return (ss!);
   }
-  
 
   bool isEmpty(ListCompanies listCompanies) {
     if (listCompanies.companies!.isNotEmpty) {
-       
-      return true ;
+      return true;
     }
-    
+
     return false;
   }
-  
 }

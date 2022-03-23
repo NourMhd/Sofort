@@ -15,8 +15,9 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          Container(height:mediaQuery.size.height ,
-          width:mediaQuery.size.width ,
+          Container(
+            height: mediaQuery.size.height,
+            width: mediaQuery.size.width,
             decoration: const BoxDecoration(
               image: DecorationImage(
                   image: AssetImage('assets/artboard.png'), fit: BoxFit.cover),
@@ -46,7 +47,7 @@ class _HomePageState extends State<HomePage> {
                     'HANDELSREGISTER',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 25,
+                      fontSize: 18,
                     ),
                   ),
                 ],
@@ -77,20 +78,18 @@ class _HomePageState extends State<HomePage> {
                   size: 35.0,
                 ),
                 label: const Text("Unternehmen suchen..."),
-                style: ButtonStyle(
-                  foregroundColor:
-                      MaterialStateProperty.all<Color>(Colors.black38),
-                  backgroundColor:
-                      MaterialStateProperty.all<Color>(Colors.white),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(20.0),
-                      ),
-                      side: BorderSide(color: Colors.white),
+                style: ElevatedButton.styleFrom(
+                    shadowColor: Colors.black,
+                    elevation: 15,
+                    side: const BorderSide(
+                      color: Color.fromARGB(255, 255, 255, 255),
+                      style: BorderStyle.solid,
+                      width: 1.0,
                     ),
-                  ),
-                ),
+                    primary: Colors.white,
+                    onPrimary: Color.fromARGB(255, 248, 64, 8),
+                    shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20)))),
                 onPressed: () => Navigator.pushNamed(context, searchpage),
               ),
             ),
@@ -103,20 +102,32 @@ class _HomePageState extends State<HomePage> {
             child: Container(
               margin: const EdgeInsets.all(1),
               child: ElevatedButton(
-                style: ButtonStyle(
-                  foregroundColor:
-                      MaterialStateProperty.all<Color>(Colors.white),
-                  backgroundColor:
-                      MaterialStateProperty.all<Color>(Colors.deepOrange[600]!),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(20.0),
-                      ),
-                      side: BorderSide(color: Colors.deepOrange[600]!),
+                style: ElevatedButton.styleFrom(
+                    shadowColor: Colors.black,
+                    elevation: 15,
+                    side: const BorderSide(
+                      color: Colors.deepOrange,
+                      style: BorderStyle.solid,
+                      width: 1.0,
                     ),
-                  ),
-                ),
+                    primary: Colors.deepOrange,
+                    onPrimary: Colors.white,
+                    shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20)))),
+                // style: ButtonStyle(
+                //   foregroundColor:
+                //       MaterialStateProperty.all<Color>(Colors.white),
+                //   backgroundColor:
+                //       MaterialStateProperty.all<Color>(Colors.deepOrange[600]!),
+                //   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                //     RoundedRectangleBorder(
+                //       borderRadius: const BorderRadius.all(
+                //         Radius.circular(20.0),
+                //       ),
+                //       side: BorderSide(color: Colors.deepOrange[600]!),
+                //     ),
+                //   ),
+                // ),
                 child: const Text('Jetzt Loslegen'),
                 // Within the `FirstRoute` widget
                 onPressed: () => Navigator.pushNamed(context, myListPage),

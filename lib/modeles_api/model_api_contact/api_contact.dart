@@ -27,6 +27,7 @@ class ApiContact{
             .decode(response.body));
       } else if(response.statusCode == 422){
         return Modelcompany(phoneNumber: "keine Daten verfügbar", email: "keine Daten verfügbar", website: "keine Daten verfügbar", mobileNumber: "keine Daten verfügbar");
+        
       }
       else {
         // If that call was not successful, throw an error.

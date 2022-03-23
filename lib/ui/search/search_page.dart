@@ -14,7 +14,7 @@ class _SearchpageState extends State<Searchpage> {
   int _selectedIndex = 0;
 
   static  final List<Widget> _widgetOptions = <Widget>[
-    Searchwidget(),
+   const Searchwidget(),
     const MyListwidget(),
     const MenuWidget(),
   ];

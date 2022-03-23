@@ -4,6 +4,7 @@ import 'package:sofort/modeles_api/model_api_info/model_info.dart';
 import 'package:sofort/ui/home_page.dart';
 import 'package:sofort/ui/menu/creation_account.dart';
 import 'package:sofort/ui/menu/login.dart';
+import 'package:sofort/ui/menu/menuPage.dart';
 import 'package:sofort/ui/menu/my_profile.dart';
 import 'package:sofort/ui/mylist/company_info.dart';
 import 'package:sofort/ui/mylist/myListWidgets/documents.dart';
@@ -19,6 +20,7 @@ const String login = 'login';
 const String creationAccount = 'creationAccount';
 const String companyInfo = 'companyInfo';
 const String documentsview = 'documentsview';
+const String menuPage = 'menu';
 
 Route<dynamic> controller(RouteSettings settings) {
   final arguments = settings.arguments;
@@ -40,7 +42,11 @@ Route<dynamic> controller(RouteSettings settings) {
           builder: (context) =>
               CompanyInfo(params: arguments as CompanyInfoParams));
     case documentsview:
-      return MaterialPageRoute(builder: (context) =>const   DocumentsView());
+      return MaterialPageRoute(builder: (context) =>
+         DocumentsView(paramss: arguments as CompanyInfoParams));
+    case menuPage:
+      return MaterialPageRoute(builder: (context) =>const MenuPage() );
+  
 
     default:
       throw ('this route name does not exist');

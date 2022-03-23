@@ -11,7 +11,7 @@ class _SearchMYlistWidgetState extends State<SearchMYlistWidget> {
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
-    return TextField(
+    return TextField(autofocus : true,
       style: const TextStyle(fontSize: 15, color: Colors.deepOrange),
       decoration: InputDecoration(
         hintText: "Suche in meinen Dokumenten...",

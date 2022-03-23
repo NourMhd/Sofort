@@ -1,7 +1,10 @@
 class ModelCompanyInfo {
   Company? company;
+  List<DK>? dK;
+  List<Bilans>? bilans;
+   
 
-  ModelCompanyInfo({this.company});
+  ModelCompanyInfo({this.company,this.bilans,this.dK});
 
   ModelCompanyInfo.fromJson(Map<String, dynamic> json) {
     company =

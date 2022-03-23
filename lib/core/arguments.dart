@@ -6,6 +6,7 @@ import 'package:sofort/modeles_api/model_api_info/model_info.dart';
 class CompanyInfoParams extends Equatable {
   final ModelCompanyInfo modelCampanyInfo;
   final Modelcompany modelcompany;
+  
 
   CompanyInfoParams(
       {required this.modelCampanyInfo, required this.modelcompany});
